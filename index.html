@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game</title>
+</head>
+
+<body>
+    <!-- write down our permanent text that goes on our screen -->
+    <p>Wins:<span id="wins"></span></p>
+    <p>Losses:<span id="losses"></span></p>
+    <p>Guesses left:<span id="guessLeft"></span></p>
+    <p>Guessesvso far:<span id="guessSoFar"></span></p>
+
+    <!-- we start js part -->
+    <script type=text/javascript> 
+    // we declare our variables and arrays
+    var wins = 0;
+    var losses = 0; 
+    var guessLeft = 9; 
+    var guessSoFar=[];
+    var computerChoices = ["a","b","c","d","e"];
+    var computerGuess = '';
+    // we start our function that will choose a random index in our array
+    function computerSelectRandomLetter() {
+        computerGuess = computerChoices[Math.floor(Math.random()*computerChoices.length)]; 
+    }
+    // 
+    function updateScores() {
+        document.querySelector("#wins").innerHTML = wins;
+        document.querySelector("#losses").innerHTML = losses;
+        document.querySelector("#guessLeft").innerHTML = guessLeft;
+        document.querySelector("#guessSoFar").innerHTML = guessSoFar;
+    }
+
+    function resetScores() {
+        guessLeft = 9;
+        guessSoFar = [];
+    }
+
+    computerSelectRandomLetter();
+    console.log (computerGuess);
+    updateScores()
+
+    document.onkeyup = function (event) {
+        
+        guessLeft--;
+
+        var userGuess = event.key.toLowerCase();
+        guessSoFar.push(userGuess)
+        updateScores()
+
+        if (userGuess == computerGuess){
+            wins ++
+            updateScores()
+            resetScores()
+            computerSelectRandomLetter()
+            
+        }
+
+        if (guessLeft ===0) {
+            losses++
+            updateScores()
+            resetScores()
+        }
+
+
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    </script> </body> </html>
