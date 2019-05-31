@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Game</title>
+    <title>Psychic-Game</title>
 </head>
 
 <body>
@@ -28,31 +28,32 @@
     function computerSelectRandomLetter() {
         computerGuess = computerChoices[Math.floor(Math.random()*computerChoices.length)]; 
     }
-    // 
+    // our function that is going to keep the scores updated
     function updateScores() {
         document.querySelector("#wins").innerHTML = wins;
         document.querySelector("#losses").innerHTML = losses;
         document.querySelector("#guessLeft").innerHTML = guessLeft;
         document.querySelector("#guessSoFar").innerHTML = guessSoFar;
     }
-
+    // our function that is going to reset the scrore when the game is over
     function resetScores() {
         guessLeft = 9;
         guessSoFar = [];
     }
-
+    // call our function and send info to our console
     computerSelectRandomLetter();
     console.log (computerGuess);
     updateScores()
-
+    // ww create inkeyup function to record a letter typed by our user
     document.onkeyup = function (event) {
-        
+        // every time user type a letter, we substract one chance to guess on our guessleft variable
         guessLeft--;
-
+        // we make sure to convert the input od userGuess into lower case
         var userGuess = event.key.toLowerCase();
+        // we push the information collected on userGuess to guessSoFar
         guessSoFar.push(userGuess)
         updateScores()
-
+        // we set our rules and update the scores every time is met one of them
         if (userGuess == computerGuess){
             wins ++
             updateScores()
